@@ -8,7 +8,10 @@ import omnitech.Subsystem;
 
 public class DuckCarousel implements Subsystem {
 
+    public static final boolean active = false;
+
     public DcMotor duckSpinner;
+
     private static final double TURN_POWER = 1.0;
     // 1.0 power m a y be a little overkill for this
 
@@ -16,6 +19,10 @@ public class DuckCarousel implements Subsystem {
         duckSpinner = opMode.hardwareMap.get(DcMotor.class, "duckSpinner");
         duckSpinner.setDirection(DcMotorSimple.Direction.FORWARD);
         duckSpinner.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    }
+
+    public boolean active() {
+        return active;
     }
 
     public void turn(boolean turning) {

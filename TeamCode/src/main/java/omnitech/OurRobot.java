@@ -9,8 +9,8 @@ public class OurRobot {
 
     // add stuff here this basically is a class that lets you access all functionality of bot
 
-    Drivetrain drivetrain = new Drivetrain();
-    DuckCarousel carousel = new DuckCarousel();
+    public Drivetrain drivetrain = new Drivetrain();
+    public DuckCarousel carousel = new DuckCarousel();
 
     private final Subsystem[] subsystems = {
             drivetrain,
@@ -19,7 +19,9 @@ public class OurRobot {
 
     public void initialize(LinearOpMode opMode) {
         for(Subsystem system : subsystems){
-            system.initialize(opMode);
+            if(system.active()) {
+                system.initialize(opMode);
+            }
         }
     }
 }

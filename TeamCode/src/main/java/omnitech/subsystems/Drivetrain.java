@@ -9,6 +9,8 @@ import omnitech.Subsystem;
 
 public class Drivetrain implements Subsystem {
 
+    public static final boolean active = true;
+
     public DcMotor rightFront;
     public DcMotor rightRear;
     public DcMotor leftFront;
@@ -37,6 +39,10 @@ public class Drivetrain implements Subsystem {
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+    }
+
+    public boolean active() {
+        return active;
     }
 
     // turn parameter is only relevant for POV movement
