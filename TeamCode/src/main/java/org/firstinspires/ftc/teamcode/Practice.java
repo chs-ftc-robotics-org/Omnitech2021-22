@@ -49,6 +49,11 @@ public class Practice extends LinearOpMode {
             leftBackMotor.setPower(leftPower);
             rightBackMotor.setPower(rightPower);
 
+            if (gamepad1.a) {
+                telemetry.addData("Hi", "im bored");
+                telemetry.update();
+            }
+
         }
     }
 }
