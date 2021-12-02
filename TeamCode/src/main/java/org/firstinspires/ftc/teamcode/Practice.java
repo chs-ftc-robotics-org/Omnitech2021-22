@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -8,17 +9,27 @@ import com.qualcomm.robotcore.util.Range;
 @TeleOp
 public class Practice extends LinearOpMode {
 
-    private DcMotor leftMotor = null;
-    private DcMotor rightMotor = null;
-
+    private DcMotor leftFrontMotor;
+    private DcMotor rightFrontMotor;
+    private DcMotor leftBackMotor;
+    private DcMotor rightBackMotor;
 
     @Override
     public void runOpMode() {
-        leftMotor = hardwareMap.get(DcMotor.class, "left_motor");
-        rightMotor = hardwareMap.get(DcMotor.class, "right_motor");
+        leftFrontMotor = hardwareMap.get(DcMotor.class, "left_front_motor");
+        rightFrontMotor = hardwareMap.get(DcMotor.class, "right_front_motor");
+        leftBackMotor = hardwareMap.get(DcMotor.class, "left_back_motor");
+        rightBackMotor = hardwareMap.get(DcMotor.class, "right_back_motor");
 
-        leftMotor.setDirection(DcMotor.Direction.FORWARD);
-        rightMotor.setDirection(DcMotor.Direction.REVERSE);
+        leftFrontMotor.setDirection(DcMotor.Direction.FORWARD);
+        rightFrontMotor.setDirection(DcMotor.Direction.REVERSE);
+        leftBackMotor.setDirection(DcMotor.Direction.FORWARD);
+        rightBackMotor.setDirection(DcMotor.Direction.REVERSE);
+
+        leftFrontMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightFrontMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         waitForStart();
 
@@ -33,8 +44,11 @@ public class Practice extends LinearOpMode {
             leftPower = Range.clip(drive + turn, -1.0, 1.0);
             rightPower = Range.clip(drive - turn, -1.0, 1.0);
 
-            leftMotor.setPower(leftPower);
-            rightMotor.setPower(rightPower);
+            leftFrontMotor.setPower(leftPower);
+            rightFrontMotor.setPower(rightPower);
+            leftBackMotor.setPower(leftPower);
+            rightBackMotor.setPower(rightPower);
+
         }
     }
 }
