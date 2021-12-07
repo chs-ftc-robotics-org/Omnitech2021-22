@@ -16,6 +16,10 @@ public class Drivetrain implements Subsystem {
     public DcMotor leftFront;
     public DcMotor leftRear;
 
+    // prob need a better variable name for this
+    public double TURNING_LIMIT = 0.75;
+    public double DRIVE_LIMIT = 0.75;
+
     public enum Movement {
         DRIVE,
         ROTATE,
@@ -48,6 +52,10 @@ public class Drivetrain implements Subsystem {
     // turn parameter is only relevant for POV movement
     // turn is a double from -1 to 1
     public void power(Movement movementType, double power, double turn) {
+
+        power *= DRIVE_LIMIT;
+        turn *= TURNING_LIMIT;
+
         switch(movementType) {
             case DRIVE:
                 rightFront.setPower(power);

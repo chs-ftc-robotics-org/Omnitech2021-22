@@ -48,6 +48,8 @@ public class DrivetrainTest extends LinearOpMode{
                 telemetry.addData("Movement Mode", "ROTATE");
             }
 
+            
+
             robot.drivetrain.power(movementType, drivePower, turnAmt);
             telemetry.update();
         }
