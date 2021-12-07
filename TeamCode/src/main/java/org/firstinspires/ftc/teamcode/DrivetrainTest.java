@@ -23,12 +23,16 @@ public class DrivetrainTest extends LinearOpMode{
 
         movementType = Drivetrain.Movement.POV;
         telemetry.addData("Movement Mode", "POV");
-        telemetry.update();
 
 
         telemetry.addData("State", "Ready to start...");
         telemetry.update();
         waitForStart();
+
+        boolean xWasPressed = false;
+        boolean yWasPressed = false;
+        boolean aWasPressed = false;
+        boolean bWasPressed = false;
 
         while(opModeIsActive()) {
             double drivePower = gamepad1.right_trigger-gamepad1.left_trigger;
@@ -36,6 +40,33 @@ public class DrivetrainTest extends LinearOpMode{
             boolean driveButton = gamepad1.dpad_left;
             boolean povButton = gamepad1.dpad_up;
             boolean rotateButton = gamepad1.dpad_right;
+            boolean xPressed = gamepad1.x;
+            boolean yPressed = gamepad1.y;
+            boolean aPressed = gamepad1.a;
+            boolean bPressed = gamepad1.b;
+
+            if(yPressed) {
+                if(!yWasPressed)
+                    robot.drivetrain.DRIVE_LIMIT += 0.05;
+            }
+            if (aPressed) {
+                if (!aWasPressed)
+                    robot.drivetrain.DRIVE_LIMIT -= 0.05;
+            }
+            if(bPressed) {
+                if(!bWasPressed)
+                    robot.drivetrain.TURNING_LIMIT += 0.05;
+            }
+            if(xPressed) {
+                if(!xWasPressed)
+                    robot.drivetrain.TURNING_LIMIT -= 0.05;
+            }
+            xWasPressed = xPressed;
+            aWasPressed = aPressed;
+            yWasPressed = yPressed;
+            bWasPressed = bPressed;
+            telemetry.addData("Drive Limit", robot.drivetrain.DRIVE_LIMIT);
+            telemetry.addData("Turning Limit", robot.drivetrain.TURNING_LIMIT);
 
             if(driveButton) {
                 movementType = Drivetrain.Movement.DRIVE;
@@ -47,6 +78,7 @@ public class DrivetrainTest extends LinearOpMode{
                 movementType = Drivetrain.Movement.ROTATE;
                 telemetry.addData("Movement Mode", "ROTATE");
             }
+
 
             
 

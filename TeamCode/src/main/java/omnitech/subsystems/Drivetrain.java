@@ -72,8 +72,8 @@ public class Drivetrain implements Subsystem {
                 break;
 
             case POV:
-                double rightPower = Range.clip(power - turn, -1.0, 1.0);
-                double leftPower = Range.clip(power + turn, -1.0, 1.0);
+                double rightPower = Range.clip(power + turn, -1.0, 1.0);
+                double leftPower = Range.clip(power - turn, -1.0, 1.0);
                 rightFront.setPower(rightPower);
                 rightRear.setPower(rightPower);
                 leftFront.setPower(leftPower);
