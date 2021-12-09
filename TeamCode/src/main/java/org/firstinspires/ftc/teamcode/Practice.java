@@ -102,6 +102,7 @@ public class Practice extends LinearOpMode {
                 rightFrontMotor.setPower(-strafePower);
                 leftBackMotor.setPower(-strafePower);
                 rightBackMotor.setPower(strafePower);
+
             }
         }
     }
