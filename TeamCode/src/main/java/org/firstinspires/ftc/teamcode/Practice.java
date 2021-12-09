@@ -13,6 +13,9 @@ public class Practice extends LinearOpMode {
     private DcMotor rightFrontMotor;
     private DcMotor leftBackMotor;
     private DcMotor rightBackMotor;
+    private double driveLimit = 0.75;
+    private double turnLimit = 0.75;
+    private boolean isPressed = false;
 
     @Override
     public void runOpMode() {
@@ -39,8 +42,28 @@ public class Practice extends LinearOpMode {
             double leftPower;
             double rightPower;
 
-            double drive = -gamepad1.left_stick_y;
-            double turn = gamepad1.right_stick_x;
+            if (gamepad1.a) {
+                driveLimit += 0.05;
+                isPressed = true;
+            }
+            else if (gamepad1.b) {
+                driveLimit -= 0.05;
+                isPressed = true;
+            }
+            else if (gamepad1.x) {
+                turnLimit += 0.05;
+                isPressed = true;
+            }
+            else if (gamepad1.y) {
+                turnLimit -= 0.05;
+                isPressed = true;
+            }
+            else {
+                isPressed = false;
+            }
+
+            double drive = -driveLimit * gamepad1.left_stick_y;
+            double turn = turnLimit * gamepad1.right_stick_x;
             leftPower = Range.clip(drive + turn, -1.0, 1.0);
             rightPower = Range.clip(drive - turn, -1.0, 1.0);
 
@@ -48,11 +71,6 @@ public class Practice extends LinearOpMode {
             rightFrontMotor.setPower(rightPower);
             leftBackMotor.setPower(leftPower);
             rightBackMotor.setPower(rightPower);
-
-            if (gamepad1.a) {
-                telemetry.addData("Hi", "im bored");
-                telemetry.update();
-            }
 
         }
     }
