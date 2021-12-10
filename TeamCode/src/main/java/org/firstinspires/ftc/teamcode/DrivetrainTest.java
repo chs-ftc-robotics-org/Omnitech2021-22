@@ -10,7 +10,6 @@ import omnitech.subsystems.Drivetrain;
 public class DrivetrainTest extends LinearOpMode{
 
     private OurRobot robot;
-    private Drivetrain.Movement movementType;
 
     @Override
     public void runOpMode(){
@@ -21,25 +20,22 @@ public class DrivetrainTest extends LinearOpMode{
         robot = new OurRobot();
         robot.initialize(this);
 
-        movementType = Drivetrain.Movement.POV;
-        telemetry.addData("Movement Mode", "POV");
-
 
         telemetry.addData("State", "Ready to start...");
         telemetry.update();
-        waitForStart();
 
         boolean xWasPressed = false;
         boolean yWasPressed = false;
         boolean aWasPressed = false;
         boolean bWasPressed = false;
 
+        waitForStart();
+
         while(opModeIsActive()) {
             double drivePower = gamepad1.right_trigger-gamepad1.left_trigger;
             double turnAmt = gamepad1.left_stick_x;
-            boolean driveButton = gamepad1.dpad_left;
-            boolean povButton = gamepad1.dpad_up;
-            boolean rotateButton = gamepad1.dpad_right;
+            double strafeX = gamepad1.right_stick_x;
+            double strafeY = gamepad1.right_stick_y;
             boolean xPressed = gamepad1.x;
             boolean yPressed = gamepad1.y;
             boolean aPressed = gamepad1.a;
@@ -67,17 +63,6 @@ public class DrivetrainTest extends LinearOpMode{
             bWasPressed = bPressed;
             telemetry.addData("Drive Limit", robot.drivetrain.DRIVE_LIMIT);
             telemetry.addData("Turning Limit", robot.drivetrain.TURNING_LIMIT);
-
-            if(driveButton) {
-                movementType = Drivetrain.Movement.DRIVE;
-                telemetry.addData("Movement Mode", "DRIVE");
-            } else if(povButton) {
-                movementType = Drivetrain.Movement.POV;
-                telemetry.addData("Movement Mode", "POV");
-            } else if(rotateButton) {
-                movementType = Drivetrain.Movement.ROTATE;
-                telemetry.addData("Movement Mode", "ROTATE");
-            }
 
 
             

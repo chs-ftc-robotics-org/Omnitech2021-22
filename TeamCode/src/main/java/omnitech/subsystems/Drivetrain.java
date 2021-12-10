@@ -21,9 +21,8 @@ public class Drivetrain implements Subsystem {
     public double DRIVE_LIMIT = 0.75;
 
     public enum Movement {
-        DRIVE,
-        ROTATE,
-        POV
+        POV,
+        STRAFE
     }
 
     public void initialize(LinearOpMode opMode) {
@@ -51,27 +50,13 @@ public class Drivetrain implements Subsystem {
 
     // turn parameter is only relevant for POV movement
     // turn is a double from -1 to 1
-    public void power(Movement movementType, double power, double turn) {
-
-        power *= DRIVE_LIMIT;
-        turn *= TURNING_LIMIT;
-
+    // for POV x is turn and y is power
+    // for STRAFE x and y are.... x and y
+    public void power(Movement movementType, double x, double y) {
         switch(movementType) {
-            case DRIVE:
-                rightFront.setPower(power);
-                rightRear.setPower(power);
-                leftFront.setPower(power);
-                leftRear.setPower(power);
-                break;
-
-            case ROTATE:
-                rightFront.setPower(-1*power);
-                rightRear.setPower(-1*power);
-                leftFront.setPower(power);
-                leftRear.setPower(power);
-                break;
-
             case POV:
+                power *= DRIVE_LIMIT;
+                turn *= TURNING_LIMIT;
                 double rightPower = Range.clip(power + turn, -1.0, 1.0);
                 double leftPower = Range.clip(power - turn, -1.0, 1.0);
                 rightFront.setPower(rightPower);
@@ -79,7 +64,12 @@ public class Drivetrain implements Subsystem {
                 leftFront.setPower(leftPower);
                 leftRear.setPower(leftPower);
                 break;
+            case STRAFE:
+                
+                break
         }
     }
+
+
 
 }
