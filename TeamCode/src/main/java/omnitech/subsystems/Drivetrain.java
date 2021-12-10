@@ -19,6 +19,8 @@ public class Drivetrain implements Subsystem {
     // prob need a better variable name for this
     public double TURNING_LIMIT = 0.75;
     public double DRIVE_LIMIT = 0.75;
+    public double STRAFE_LIMIT = 0.7;
+    // 0.7 strafe limit makes motions in all directions the same speed
 
     public enum Movement {
         POV,
@@ -55,17 +57,28 @@ public class Drivetrain implements Subsystem {
     public void power(Movement movementType, double x, double y) {
         switch(movementType) {
             case POV:
-                power *= DRIVE_LIMIT;
-                turn *= TURNING_LIMIT;
-                double rightPower = Range.clip(power + turn, -1.0, 1.0);
-                double leftPower = Range.clip(power - turn, -1.0, 1.0);
+                y *= DRIVE_LIMIT;
+                x *= TURNING_LIMIT;
+                double rightPower = Range.clip(y + x, -1.0, 1.0);
+                double leftPower = Range.clip(y - x, -1.0, 1.0);
                 rightFront.setPower(rightPower);
                 rightRear.setPower(rightPower);
                 leftFront.setPower(leftPower);
                 leftRear.setPower(leftPower);
                 break;
             case STRAFE:
+                x *= STRAFE_LIMIT;
+                y *= STRAFE_LIMIT;
                 
+                double power1 = Range.clip(x-y, -1.0, 1.0);
+                double power2 = Range.clip(-x-y, -1.0, 1.0);
+
+
+                leftFront.setPower(power1);
+                rightFront.setPower(power2));
+                leftRear.setPower(power2);
+                rightRear.setPower(power1);
+
                 break
         }
     }

@@ -26,8 +26,8 @@ public class DrivetrainTest extends LinearOpMode{
 
         boolean xWasPressed = false;
         boolean yWasPressed = false;
-        boolean aWasPressed = false;
         boolean bWasPressed = false;
+        int positiveNegativeMultiplier = 1;
 
         waitForStart();
 
@@ -41,33 +41,25 @@ public class DrivetrainTest extends LinearOpMode{
             boolean aPressed = gamepad1.a;
             boolean bPressed = gamepad1.b;
 
-            if(yPressed) {
-                if(!yWasPressed)
-                    robot.drivetrain.DRIVE_LIMIT += 0.05;
-            }
-            if (aPressed) {
-                if (!aWasPressed)
-                    robot.drivetrain.DRIVE_LIMIT -= 0.05;
-            }
-            if(bPressed) {
-                if(!bWasPressed)
-                    robot.drivetrain.TURNING_LIMIT += 0.05;
-            }
-            if(xPressed) {
-                if(!xWasPressed)
-                    robot.drivetrain.TURNING_LIMIT -= 0.05;
-            }
+            if(aPressed) positiveNegativeMultiplier = -1
+            else positiveNegativeMultiplier = 1;
+            
+            if(yPressed && !yWasPressed) robot.drivetrain.TURNING_LIMIT += 0.05*positiveNegativeMultiplier;
+            if(bPressed && !bWasPressed) robot.drivetrain.STRAFE_LIMIT += 0.05*positiveNegativeMultiplier;
+            if(xPressed && !xWasPressed) robot.drivetrain.DRIVE_LIMIT += 0.05*positiveNegativeMultiplier;
+
             xWasPressed = xPressed;
-            aWasPressed = aPressed;
             yWasPressed = yPressed;
             bWasPressed = bPressed;
+
             telemetry.addData("Drive Limit", robot.drivetrain.DRIVE_LIMIT);
             telemetry.addData("Turning Limit", robot.drivetrain.TURNING_LIMIT);
+            telemetry.addData("Strafe Limit", robot.drivetrain.STRAFE_LIMIT);
 
 
-            
+            robot.drivetrain.power(Drivetrain.POV, turnAmt, drivePower);
+            robot.drivetrain.power(Drivetrain.STRAFE, strafeX, strafeY);
 
-            robot.drivetrain.power(movementType, drivePower, turnAmt);
             telemetry.update();
         }
 
