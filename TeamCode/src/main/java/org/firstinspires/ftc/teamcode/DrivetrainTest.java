@@ -27,7 +27,7 @@ public class DrivetrainTest extends LinearOpMode{
         boolean xWasPressed = false;
         boolean yWasPressed = false;
         boolean bWasPressed = false;
-        int positiveNegativeMultiplier = 1;
+        int positiveNegativeMultiplier;
 
         waitForStart();
 
@@ -41,7 +41,7 @@ public class DrivetrainTest extends LinearOpMode{
             boolean aPressed = gamepad1.a;
             boolean bPressed = gamepad1.b;
 
-            if(aPressed) positiveNegativeMultiplier = -1
+            if(aPressed) positiveNegativeMultiplier = -1;
             else positiveNegativeMultiplier = 1;
             
             if(yPressed && !yWasPressed) robot.drivetrain.TURNING_LIMIT += 0.05*positiveNegativeMultiplier;
@@ -57,8 +57,8 @@ public class DrivetrainTest extends LinearOpMode{
             telemetry.addData("Strafe Limit", robot.drivetrain.STRAFE_LIMIT);
 
 
-            robot.drivetrain.power(Drivetrain.POV, turnAmt, drivePower);
-            robot.drivetrain.power(Drivetrain.STRAFE, strafeX, strafeY);
+            robot.drivetrain.power(Drivetrain.Movement.POV, turnAmt, drivePower);
+            robot.drivetrain.power(Drivetrain.Movement.STRAFE, strafeX, strafeY);
 
             telemetry.update();
         }

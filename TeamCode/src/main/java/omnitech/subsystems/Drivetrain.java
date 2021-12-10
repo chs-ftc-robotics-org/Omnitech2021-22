@@ -75,11 +75,11 @@ public class Drivetrain implements Subsystem {
 
 
                 leftFront.setPower(power1);
-                rightFront.setPower(power2));
+                rightFront.setPower(power2);
                 leftRear.setPower(power2);
                 rightRear.setPower(power1);
 
-                break
+                break;
         }
     }
 
