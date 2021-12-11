@@ -14,8 +14,8 @@ public class Outtake implements Subsystem {
     public DcMotor slide;
     public Servo box;
 
-    private static double slidePower = 0.25;
-    private static double boxPosition = 0.5;
+    private double slidePower = 0.25;
+    private double boxPosition = 0.5;
 
     @Override
     public void initialize(LinearOpMode opMode) {
