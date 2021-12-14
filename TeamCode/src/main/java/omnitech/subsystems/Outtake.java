@@ -29,14 +29,9 @@ public class Outtake implements Subsystem {
     @Override
     public boolean active() { return active; }
 
-    public void setSlidePower(double power) {
-        slidePower = power;
-    }
+    public void setSlidePower(double power) { slidePower = power; }
 
-    public void setBoxPosition(double position) {
-        boxPosition = position;
-        box.setPosition(boxPosition);
-    }
+    public void setBoxPosition(double position) { boxPosition = position; }
 
     public void slideMove(boolean moving) {
         if (moving) {
