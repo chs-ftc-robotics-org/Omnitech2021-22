@@ -54,11 +54,11 @@ public class DrivetrainTest extends LinearOpMode{
 
             telemetry.addData("Drive Limit", robot.drivetrain.DRIVE_LIMIT);
             telemetry.addData("Turning Limit", robot.drivetrain.TURNING_LIMIT);
-            telemetry.addData("Strafe Limit", robot.drivetrain.STRAFE_LIMIT);
+//            telemetry.addData("Strafe Limit", robot.drivetrain.STRAFE_LIMIT);
 
 
             robot.drivetrain.power(Drivetrain.Movement.POV, turnAmt, drivePower);
-            robot.drivetrain.power(Drivetrain.Movement.STRAFE, strafeX, strafeY);
+//            robot.drivetrain.power(Drivetrain.Movement.STRAFE, strafeX, strafeY);
 
             telemetry.update();
         }
