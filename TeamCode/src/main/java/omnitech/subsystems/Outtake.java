@@ -16,6 +16,7 @@ public class Outtake implements Subsystem {
 
     private double slidePower = 0.25;
     private double boxPosition = 0.5;
+    private double slideRotations = 4.25;
 
     @Override
     public void initialize(LinearOpMode opMode) {
@@ -30,6 +31,8 @@ public class Outtake implements Subsystem {
     public boolean active() { return active; }
 
     public void setSlidePower(double power) { slidePower = power; }
+
+    public void setRotations(double rotations) { slideRotations = rotations; }
 
     public void setBoxPosition(double position) { boxPosition = position; }
 
