@@ -42,6 +42,7 @@ public class Outtake implements Subsystem {
         }
         else {
             slide.setPower(0.0);
+
         }
     }
 }
