@@ -14,9 +14,12 @@ public class Outtake implements Subsystem {
     public DcMotor slide;
     public Servo box;
 
-    private double slidePower = 0.25;
-    private double boxPosition = 0.5;
+    public double slidePower = 0.25;
+    public double boxPosition = 0.5;
+
+    // just for reference
     private double slideRotations = 4.25;
+    private double motorTicks;
 
     @Override
     public void initialize(LinearOpMode opMode) {
@@ -32,8 +35,6 @@ public class Outtake implements Subsystem {
 
     public void setSlidePower(double power) { slidePower = power; }
 
-    public void setRotations(double rotations) { slideRotations = rotations; }
-
     public void setBoxPosition(double position) { boxPosition = position; }
 
     public void slideMove(boolean moving) {
@@ -44,5 +45,21 @@ public class Outtake implements Subsystem {
             slide.setPower(0.0);
 
         }
+    }
+
+    public void extendSlideFully() {
+        slidePower = java.lang.Math.abs(slidePower);
+        while (slide.getCurrentPosition() < 4.25 * motorTicks) {
+            slideMove(true);
+        }
+        slideMove(false);
+    }
+
+    public void retractSlideFully() {
+        slidePower = -java.lang.Math.abs(slidePower);
+        while (slide.getCurrentPosition() > 0) {
+            slideMove(true);
+        }
+        slideMove(false);
     }
 }
