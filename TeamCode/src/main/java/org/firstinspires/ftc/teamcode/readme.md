@@ -16,7 +16,7 @@ To locate these samples, find the FtcRobotController module in the "Project/Andr
 Expand the following tree elements:
  FtcRobotController / java / org.firstinspires.ftc.robotcontroller / external / samples
 
-A range of different samples classes can be seen in this folder.
+A range of different samples classes can be seen in this folder. :)
 The class names follow a naming convention which indicates the purpose of each class.
 The full description of this convention is found in the samples/sample_convention.md file.
 
