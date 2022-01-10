@@ -72,39 +72,4 @@ public class Drivetrain implements Subsystem {
         rightRear.setPower((power1-r)/denominator);
     }
 
-    // turn parameter is only relevant for POV movement
-    // turn is a double from -1 to 1
-    // for POV x is turn and y is power
-    // for STRAFE x and y are.... x and y
-    public void power(Movement movementType, double x, double y) {
-        switch(movementType) {
-            case POV:
-                y *= DRIVE_LIMIT;
-                x *= TURNING_LIMIT;
-                double rightPower = Range.clip(y + x, -1.0, 1.0);
-                double leftPower = Range.clip(y - x, -1.0, 1.0);
-                rightFront.setPower(rightPower);
-                rightRear.setPower(rightPower);
-                leftFront.setPower(leftPower);
-                leftRear.setPower(leftPower);
-                break;
-            case STRAFE:
-                x *= STRAFE_LIMIT;
-                y *= STRAFE_LIMIT;
-                
-                double power1 = Range.clip(x-y, -1.0, 1.0);
-                double power2 = Range.clip(-x-y, -1.0, 1.0);
-
-
-                leftFront.setPower(power1);
-                rightFront.setPower(power2);
-                leftRear.setPower(power2);
-                rightRear.setPower(power1);
-
-                break;
-        }
-    }
-
-
-
 }
