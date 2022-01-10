@@ -34,9 +34,11 @@ public class TeleOpMode extends LinearOpMode {
             double strafeX = gamepad1.right_stick_x;
             double strafeY = gamepad1.right_stick_y;
 
-            robot.drivetrain.power(Drivetrain.Movement.POV, turnAmt, drivePower);
+
+            robot.drivetrain.povDrive(drivePower, turnAmt);
+            // should probably use a deadzone for this
             if(Math.abs(strafeX)>0.3 || Math.abs(strafeY)>0.3) {
-                robot.drivetrain.power(Drivetrain.Movement.STRAFE, strafeX, strafeY);
+                robot.drivetrain.strafe(strafeX, strafeY, turnAmt);
             }
 
             // carousel
@@ -49,6 +51,9 @@ public class TeleOpMode extends LinearOpMode {
 
             // intake (probably use a button to turn on and off)
             // outtake (probably use left and right bumper)
+
+            robot.imu.logVals();
+            telemetry.update();
         }
     }
 }

@@ -16,11 +16,7 @@ public class Drivetrain implements Subsystem {
     public DcMotor leftFront;
     public DcMotor leftRear;
 
-    // prob need a better variable name for this
-    public double TURNING_LIMIT = 0.75;
-    public double DRIVE_LIMIT = 0.75;
-    public double STRAFE_LIMIT = 0.7;
-    // 0.7 strafe limit makes motions in all directions the same speed
+
 
     public enum Movement {
         POV,
@@ -48,6 +44,32 @@ public class Drivetrain implements Subsystem {
 
     public boolean active() {
         return active;
+    }
+
+    public void povDrive(double power, double turn) {
+        double y = power;
+        double x = turn;
+        double rightPower = Range.clip(y + x, -1.0, 1.0);
+        double leftPower = Range.clip(y - x, -1.0, 1.0);
+        rightFront.setPower(rightPower);
+        rightRear.setPower(rightPower);
+        leftFront.setPower(leftPower);
+        leftRear.setPower(leftPower);
+    }
+
+    public void strafe(double x, double y, double r){
+        x *= 1.1;
+        
+        double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
+
+        double power1 = Range.clip(x-y, -1.0, 1.0);
+        double power2 = Range.clip(-x-y, -1.0, 1.0);
+
+        
+        leftFront.setPower((power1+r)/denominator);
+        rightFront.setPower((power2-r)/denominator);
+        leftRear.setPower((power2+r)/denominator);
+        rightRear.setPower((power1-r)/denominator);
     }
 
     // turn parameter is only relevant for POV movement
