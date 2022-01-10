@@ -9,7 +9,7 @@ import omnitech.Subsystem;
 
 public class IMU implements Subsystem {
 
-    public static final boolean active = false;
+    public static final boolean active = true;
     public boolean active() {
         return active;
     }

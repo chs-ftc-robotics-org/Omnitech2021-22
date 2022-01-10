@@ -35,7 +35,9 @@ public class TeleOpMode extends LinearOpMode {
             double strafeY = gamepad1.right_stick_y;
 
             robot.drivetrain.power(Drivetrain.Movement.POV, turnAmt, drivePower);
-            robot.drivetrain.power(Drivetrain.Movement.STRAFE, strafeX, strafeY);
+            if(Math.abs(strafeX)>0.3 || Math.abs(strafeY)>0.3) {
+                robot.drivetrain.power(Drivetrain.Movement.STRAFE, strafeX, strafeY);
+            }
 
             // carousel
 //            if (gamepad1.a) {
