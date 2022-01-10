@@ -44,21 +44,21 @@ public class DrivetrainTest extends LinearOpMode{
             if(aPressed) positiveNegativeMultiplier = -1;
             else positiveNegativeMultiplier = 1;
             
-            if(yPressed && !yWasPressed) robot.drivetrain.TURNING_LIMIT += 0.05*positiveNegativeMultiplier;
-            if(bPressed && !bWasPressed) robot.drivetrain.STRAFE_LIMIT += 0.05*positiveNegativeMultiplier;
-            if(xPressed && !xWasPressed) robot.drivetrain.DRIVE_LIMIT += 0.05*positiveNegativeMultiplier;
+//            if(yPressed && !yWasPressed) robot.drivetrain.TURNING_LIMIT += 0.05*positiveNegativeMultiplier;
+//            if(bPressed && !bWasPressed) robot.drivetrain.STRAFE_LIMIT += 0.05*positiveNegativeMultiplier;
+//            if(xPressed && !xWasPressed) robot.drivetrain.DRIVE_LIMIT += 0.05*positiveNegativeMultiplier;
 
             xWasPressed = xPressed;
             yWasPressed = yPressed;
             bWasPressed = bPressed;
 
-            telemetry.addData("Drive Limit", robot.drivetrain.DRIVE_LIMIT);
-            telemetry.addData("Turning Limit", robot.drivetrain.TURNING_LIMIT);
-            telemetry.addData("Strafe Limit", robot.drivetrain.STRAFE_LIMIT);
+//            telemetry.addData("Drive Limit", robot.drivetrain.DRIVE_LIMIT);
+//            telemetry.addData("Turning Limit", robot.drivetrain.TURNING_LIMIT);
+//            telemetry.addData("Strafe Limit", robot.drivetrain.STRAFE_LIMIT);
 
 
-            robot.drivetrain.power(Drivetrain.Movement.POV, turnAmt, drivePower);
-            robot.drivetrain.power(Drivetrain.Movement.STRAFE, strafeX, strafeY);
+//            robot.drivetrain.power(Drivetrain.Movement.POV, turnAmt, drivePower);
+//            robot.drivetrain.power(Drivetrain.Movement.STRAFE, strafeX, strafeY);
 
             telemetry.update();
         }

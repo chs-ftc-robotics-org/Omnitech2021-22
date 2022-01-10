@@ -20,7 +20,7 @@ public class IMU implements Subsystem {
     }
 
     public BNO055IMU imu;
-    public OpMode currentOpMode;
+    public LinearOpMode currentOpMode;
 
     public void initialize(LinearOpMode opMode) {
         currentOpMode = opMode;

@@ -60,7 +60,7 @@ public class Drivetrain implements Subsystem {
     public void strafe(double x, double y, double r){
         x *= 1.1;
         
-        double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
+        double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(r), 1);
 
         double power1 = Range.clip(x-y, -1.0, 1.0);
         double power2 = Range.clip(-x-y, -1.0, 1.0);
