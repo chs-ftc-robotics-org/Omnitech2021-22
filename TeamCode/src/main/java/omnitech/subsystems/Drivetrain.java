@@ -62,8 +62,8 @@ public class Drivetrain implements Subsystem {
         
         double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(r), 1);
 
-        double power1 = Range.clip(x-y, -1.0, 1.0);
-        double power2 = Range.clip(-x-y, -1.0, 1.0);
+        double power1 = x-y;
+        double power2 = -x-y;
 
         
         leftFront.setPower((power1+r)/denominator);

@@ -43,5 +43,9 @@ public class IMU implements Subsystem {
         currentOpMode.telemetry.addData("3rd Angle", angles.thirdAngle);
     }
 
+    public double getHeading() {
+        return imu.getAngularOrientation().firstAngle;
+    }
+
 
 }
