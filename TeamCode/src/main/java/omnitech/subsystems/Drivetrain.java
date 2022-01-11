@@ -111,4 +111,23 @@ public class Drivetrain implements Subsystem {
         }
     }
 
+    public int inchesToEncoderCounts(double inches) {
+        // (537.6 ticks/1 rev) * (1 rev/100pi mm) * (1 mm/0.0393701 inches)
+        double countsPerInch = 43.5;
+        return (int) (inches * countsPerInch);
+    }
+
+    public void moveByInches(double inches) {
+        int encoderCounts = inchesToEncoderCounts(inches);
+
+        rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        rightFront.setTargetPosition(encoderCounts);
+        rightRear.setTargetPosition(encoderCounts);
+        leftFront.setTargetPosition(encoderCounts);
+        leftRear.setTargetPosition(encoderCounts);
+    }
 }
