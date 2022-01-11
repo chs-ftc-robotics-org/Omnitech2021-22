@@ -40,11 +40,13 @@ public class AutoOpMode extends LinearOpMode {
 
             double timeNow = timer.milliseconds();
 
-            double kp = 0.075; // 0.05 is kinda stable and 0.75 oscillates a decent amt2
+            double kp = 0.06; // 0.05 is kinda stable and 0.75 oscillates a decent amt2
             double p = -1*kp*(target - angle);
 
-            double kd = 0;
+            double kd = 100;
             double d = kd*(p-lastError)/(timeNow-lastTime);
+
+
 
 
             double turnAmt = Range.clip(p+d, -1.0, 1.0);
