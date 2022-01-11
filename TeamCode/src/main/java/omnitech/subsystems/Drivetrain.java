@@ -16,6 +16,7 @@ public class Drivetrain implements Subsystem {
     public DcMotor leftFront;
     public DcMotor leftRear;
 
+    public double drivetrainTicks = 537.6;
 
 
     public enum Movement {
@@ -39,6 +40,11 @@ public class Drivetrain implements Subsystem {
         rightRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
     }
 
@@ -70,6 +76,26 @@ public class Drivetrain implements Subsystem {
         rightFront.setPower((power2-r)/denominator);
         leftRear.setPower((power2+r)/denominator);
         rightRear.setPower((power1-r)/denominator);
+    }
+
+    public int inchesToEncoderCounts(double inches) {
+        // (537.6 ticks/1 rev) * (1 rev/100pi mm) * (1 mm/0.0393701 inches)
+        double countsPerInch = 43.5;
+        return (int) (inches * countsPerInch);
+    }
+
+    public void moveByInches(double inches) {
+        int encoderCounts = inchesToEncoderCounts(inches);
+
+        rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        rightFront.setTargetPosition(encoderCounts);
+        rightRear.setTargetPosition(encoderCounts);
+        leftFront.setTargetPosition(encoderCounts);
+        leftRear.setTargetPosition(encoderCounts);
     }
 
 }
