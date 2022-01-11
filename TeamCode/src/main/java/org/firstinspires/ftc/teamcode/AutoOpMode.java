@@ -40,7 +40,7 @@ public class AutoOpMode extends LinearOpMode {
 
             double timeNow = timer.milliseconds();
 
-            double kp = 0.075; // 0.05 is kinda stable and 0.75 oscillates a decent amt
+            double kp = 0.075; // 0.05 is kinda stable and 0.75 oscillates a decent amt2
             double p = -1*kp*(target - angle);
 
             double kd = 0;
