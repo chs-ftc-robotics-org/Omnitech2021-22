@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import omnitech.OurRobot;
 import omnitech.Subsystem;
 
 public class Outtake implements Subsystem {
@@ -22,7 +23,7 @@ public class Outtake implements Subsystem {
     private double motorTicks;
 
     @Override
-    public void initialize(LinearOpMode opMode) {
+    public void initialize(LinearOpMode opMode, OurRobot robot) {
         slide = opMode.hardwareMap.get(DcMotor.class, "slide");
         slide.setDirection(DcMotorSimple.Direction.FORWARD);
         slide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

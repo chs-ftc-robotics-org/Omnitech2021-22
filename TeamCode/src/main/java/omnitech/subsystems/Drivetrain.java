@@ -3,8 +3,10 @@ package omnitech.subsystems;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
+import omnitech.OurRobot;
 import omnitech.Subsystem;
 
 public class Drivetrain implements Subsystem {
@@ -16,14 +18,18 @@ public class Drivetrain implements Subsystem {
     public DcMotor leftFront;
     public DcMotor leftRear;
 
-
+    public OurRobot robotInstance;
+    public LinearOpMode opModeInstance;
 
     public enum Movement {
         POV,
         STRAFE
     }
 
-    public void initialize(LinearOpMode opMode) {
+    public void initialize(LinearOpMode opMode, OurRobot robot) {
+
+        robotInstance = robot;
+        opModeInstance = opMode;
 
         rightFront = opMode.hardwareMap.get(DcMotor.class, "rightFront");
         rightRear = opMode.hardwareMap.get(DcMotor.class, "rightRear");
@@ -70,6 +76,39 @@ public class Drivetrain implements Subsystem {
         rightFront.setPower((power2-r)/denominator);
         leftRear.setPower((power2+r)/denominator);
         rightRear.setPower((power1-r)/denominator);
+    }
+
+    public void rotate(double target) {
+
+        ElapsedTime timer = new ElapsedTime();
+        timer.reset();
+
+        double lastError = -1*(target - robotInstance.imu.getHeading());
+        double lastTime = timer.milliseconds();
+        while(opModeInstance.opModeIsActive()) {
+            robotInstance.imu.logVals();
+            opModeInstance.telemetry.update();
+            double angle = robotInstance.imu.getHeading();
+
+            double timeNow = timer.milliseconds();
+
+            double kp = 0.06; // 0.05 is kinda stable and 0.75 oscillates a decent amt2
+            double p = -1*kp*(target - angle);
+
+            double kd = 50; // between 75 and 100 kinda works
+            double d = kd*(p-lastError)/(timeNow-lastTime);
+
+
+
+
+            double turnAmt = Range.clip(p+d, -1.0, 1.0);
+
+            robotInstance.drivetrain.povDrive(0.0, turnAmt);
+
+            lastError = p;
+            lastTime = timeNow;
+
+        }
     }
 
 }

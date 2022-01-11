@@ -29,7 +29,7 @@ public class OurRobot {
     public void initialize(LinearOpMode opMode) {
         for(Subsystem system : subsystems){
             if(system.active()) {
-                system.initialize(opMode);
+                system.initialize(opMode, this);
             }
         }
     }

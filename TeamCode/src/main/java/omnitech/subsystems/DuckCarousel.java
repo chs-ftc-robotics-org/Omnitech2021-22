@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+import omnitech.OurRobot;
 import omnitech.Subsystem;
 
 public class DuckCarousel implements Subsystem {
@@ -15,7 +16,7 @@ public class DuckCarousel implements Subsystem {
     private static final double TURN_POWER = 1.0;
     // 1.0 power m a y be a little overkill for this
 
-    public void initialize(LinearOpMode opMode) {
+    public void initialize(LinearOpMode opMode, OurRobot robot) {
         duckSpinner = opMode.hardwareMap.get(DcMotor.class, "duckSpinner");
         duckSpinner.setDirection(DcMotorSimple.Direction.FORWARD);
         duckSpinner.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

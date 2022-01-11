@@ -5,6 +5,7 @@ import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import omnitech.OurRobot;
 import omnitech.Subsystem;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -22,7 +23,7 @@ public class IMU implements Subsystem {
     public BNO055IMU imu;
     public LinearOpMode currentOpMode;
 
-    public void initialize(LinearOpMode opMode) {
+    public void initialize(LinearOpMode opMode, OurRobot robot) {
         currentOpMode = opMode;
         imu = opMode.hardwareMap.get(BNO055IMU.class, "IMU");
         BNO055IMU.Parameters params = new BNO055IMU.Parameters();

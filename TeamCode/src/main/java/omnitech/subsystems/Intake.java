@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+import omnitech.OurRobot;
 import omnitech.Subsystem;
 
 public class Intake implements Subsystem {
@@ -16,7 +17,7 @@ public class Intake implements Subsystem {
     private double intakePower = 0.25;
 
     @Override
-    public void initialize(LinearOpMode opMode) {
+    public void initialize(LinearOpMode opMode, OurRobot robot) {
         intakeMotor = opMode.hardwareMap.get(DcMotor.class,"intake_motor");
         intakeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

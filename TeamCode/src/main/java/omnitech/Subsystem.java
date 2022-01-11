@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 public interface Subsystem {
 
-    void initialize(LinearOpMode opMode);
+    void initialize(LinearOpMode opMode, OurRobot robot);
     boolean active();
 
 }
