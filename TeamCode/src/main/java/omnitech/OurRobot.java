@@ -2,11 +2,7 @@ package omnitech;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import omnitech.subsystems.Drivetrain;
-import omnitech.subsystems.DuckCarousel;
-import omnitech.subsystems.IMU;
-import omnitech.subsystems.Intake;
-import omnitech.subsystems.Outtake;
+import omnitech.subsystems.*;
 
 public class OurRobot {
 
@@ -17,13 +13,17 @@ public class OurRobot {
     public IMU imu = new IMU();
     public Intake intake = new Intake();
     public Outtake outtake = new Outtake();
+    public Camera camera = new Camera();
+    public Slides slides = new Slides();
 
     private final Subsystem[] subsystems = {
+            camera,
             drivetrain,
             carousel,
             imu,
             intake,
-            outtake
+            outtake,
+            slides
     };
 
     public void initialize(LinearOpMode opMode) {
