@@ -22,11 +22,15 @@ public class Outtake implements Subsystem {
     private double slideRotations = 4.25;
     private double motorTicks;
 
+    public boolean slideExtendedFully = false;
+    public boolean slideRetractedFully = true;
+
     @Override
     public void initialize(LinearOpMode opMode, OurRobot robot) {
         slide = opMode.hardwareMap.get(DcMotor.class, "slide");
         slide.setDirection(DcMotorSimple.Direction.FORWARD);
         slide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         box = opMode.hardwareMap.get(Servo.class, "box");
         box.setDirection(Servo.Direction.FORWARD);
     }
@@ -48,19 +52,42 @@ public class Outtake implements Subsystem {
         }
     }
 
-    public void extendSlideFully() {
+    public void slideHighestPosition() {
         slidePower = java.lang.Math.abs(slidePower);
         while (slide.getCurrentPosition() < 4.25 * motorTicks) {
             slideMove(true);
         }
         slideMove(false);
+        slideExtendedFully = true;
+        slideRetractedFully = false;
     }
 
-    public void retractSlideFully() {
+    public void slideLowestPosition() {
         slidePower = -java.lang.Math.abs(slidePower);
         while (slide.getCurrentPosition() > 0) {
             slideMove(true);
         }
         slideMove(false);
+        slideExtendedFully = false;
+        slideRetractedFully = true;
+    }
+
+    public void slideMiddlePosition() {
+        if (slideExtendedFully) {
+            slidePower = -java.lang.Math.abs(slidePower);
+            while (slide.getCurrentPosition() > 2.125 * motorTicks) {
+                slideMove(true);
+            }
+            slideMove(false);
+        }
+        else {
+            slidePower = java.lang.Math.abs(slidePower);
+            while (slide.getCurrentPosition() < 2.125 * motorTicks) {
+                slideMove(true);
+            }
+            slideMove(false);
+        }
+        slideExtendedFully = false;
+        slideRetractedFully = false;
     }
 }
