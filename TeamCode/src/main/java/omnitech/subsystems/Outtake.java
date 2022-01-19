@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
+import static java.lang.Math.*;
 
 import omnitech.OurRobot;
 import omnitech.Subsystem;
@@ -53,7 +54,7 @@ public class Outtake implements Subsystem {
     }
 
     public void slideHighestPosition() {
-        slidePower = java.lang.Math.abs(slidePower);
+        slidePower = abs(slidePower);
         while (slide.getCurrentPosition() < 4.25 * motorTicks) {
             slideMove(true);
         }
@@ -63,7 +64,7 @@ public class Outtake implements Subsystem {
     }
 
     public void slideLowestPosition() {
-        slidePower = -java.lang.Math.abs(slidePower);
+        slidePower = abs(slidePower);
         while (slide.getCurrentPosition() > 0) {
             slideMove(true);
         }
@@ -74,14 +75,14 @@ public class Outtake implements Subsystem {
 
     public void slideMiddlePosition() {
         if (slideExtendedFully) {
-            slidePower = -java.lang.Math.abs(slidePower);
+            slidePower = abs(slidePower);
             while (slide.getCurrentPosition() > 2.125 * motorTicks) {
                 slideMove(true);
             }
             slideMove(false);
         }
         else {
-            slidePower = java.lang.Math.abs(slidePower);
+            slidePower = abs(slidePower);
             while (slide.getCurrentPosition() < 2.125 * motorTicks) {
                 slideMove(true);
             }
