@@ -116,6 +116,11 @@ public class Drivetrain implements Subsystem {
         }
     }
 
+    //TODO: Add PID to move method
+    public void move(double inches, double power) {
+        robotInstance.drivetrain.povDrive(power, 0);
+    }
+
     public int inchesToEncoderCounts(double inches) {
         // (537.6 ticks/1 rev) * (1 rev/100pi mm) * (1 mm/0.0393701 inches)
         double countsPerInch = 43.5;
