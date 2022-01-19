@@ -42,12 +42,12 @@ public class TeleOpMode extends LinearOpMode {
             }
 
             // carousel
-//            if (gamepad1.a) {
-//                robot.carousel.turn(true);
-//            }
-//            else {
-//                robot.carousel.turn(false);
-//            }
+            if (gamepad1.a) {
+                robot.carousel.turn(true);
+            }
+            else {
+                robot.carousel.turn(false);
+            }
 
             // intake (probably use a button to turn on and off)
             // outtake (probably use left and right bumper)
