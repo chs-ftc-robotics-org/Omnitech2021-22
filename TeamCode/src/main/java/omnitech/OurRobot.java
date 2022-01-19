@@ -15,6 +15,7 @@ public class OurRobot {
     public Outtake outtake = new Outtake();
     public Camera camera = new Camera();
     public Slides slides = new Slides();
+    public RGB rgb = new RGB();
 
     private final Subsystem[] subsystems = {
             camera,
@@ -23,7 +24,8 @@ public class OurRobot {
             imu,
             intake,
             outtake,
-            slides
+            //slides
+            //rgb
     };
 
     public void initialize(LinearOpMode opMode) {
