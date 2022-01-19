@@ -104,8 +104,6 @@ public class Drivetrain implements Subsystem {
             double d = kd*(p-lastError)/(timeNow-lastTime);
 
 
-
-
             double turnAmt = Range.clip(p+d, -1.0, 1.0);
 
             robotInstance.drivetrain.povDrive(0.0, turnAmt);
@@ -127,6 +125,7 @@ public class Drivetrain implements Subsystem {
         return (int) (inches * countsPerInch);
     }
 
+    // this is probably gonna be jerky if we actually use this
     public void moveByInches(double inches) {
 
         rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

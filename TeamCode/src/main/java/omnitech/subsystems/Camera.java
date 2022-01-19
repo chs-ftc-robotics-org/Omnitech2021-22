@@ -13,7 +13,7 @@ import omnitech.OurRobot;
 import omnitech.Subsystem;
 
 public class Camera implements Subsystem {
-    public static final boolean active = false;
+    public static final boolean active = true;
     public static TFObjectDetector tfod;
 
     private static final String VUFORIA_KEY =
