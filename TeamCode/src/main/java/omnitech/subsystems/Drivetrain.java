@@ -47,11 +47,6 @@ public class Drivetrain implements Subsystem {
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
     }
 
     public boolean active() {
@@ -98,10 +93,10 @@ public class Drivetrain implements Subsystem {
 
             double timeNow = timer.milliseconds();
 
-            double kp = 0.06; // 0.05 is kinda stable and 0.75 oscillates a decent amt2
+            double kp = 0.05; // 0.05 is kinda stable and 0.75 oscillates a decent amt2
             double p = -1*kp*(target - angle);
 
-            double kd = 50; // between 75 and 100 kinda works
+            double kd = 100; // between 75 and 100 kinda works
             double d = kd*(p-lastError)/(timeNow-lastTime);
 
 

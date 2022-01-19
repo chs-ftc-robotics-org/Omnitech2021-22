@@ -9,11 +9,11 @@ import omnitech.Subsystem;
 
 public class DuckCarousel implements Subsystem {
 
-    public static final boolean active = false;
+    public static final boolean active = true;
 
     public DcMotor duckSpinner;
 
-    private static final double TURN_POWER = 1.0;
+    private static final double TURN_POWER = 0.3;
     // 1.0 power m a y be a little overkill for this
 
     public void initialize(LinearOpMode opMode, OurRobot robot) {

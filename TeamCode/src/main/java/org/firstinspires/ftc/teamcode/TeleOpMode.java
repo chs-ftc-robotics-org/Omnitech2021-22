@@ -42,12 +42,7 @@ public class TeleOpMode extends LinearOpMode {
             }
 
             // carousel
-            if (gamepad1.a) {
-                robot.carousel.turn(true);
-            }
-            else {
-                robot.carousel.turn(false);
-            }
+            robot.carousel.turn(gamepad1.a);
 
             // intake
             robot.intake.intakeMove(gamepad1.b);
