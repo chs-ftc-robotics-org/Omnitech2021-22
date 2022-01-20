@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import static java.lang.Math.abs;
+
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -26,43 +28,39 @@ public class TwoDriverTeleop extends LinearOpMode{
         telemetry.addData("State", "Ready to start...");
         telemetry.update();
 
-        boolean xWasPressed = false;
-        boolean yWasPressed = false;
-        boolean bWasPressed = false;
-        int positiveNegativeMultiplier;
-
         waitForStart();
 
         while(opModeIsActive()) {
+            // idea: driver 1 focuses on driving robot around while driver 2 focuses on other stuff
             double drivePower = gamepad1.right_trigger-gamepad1.left_trigger;
             double turnAmt = gamepad1.left_stick_x;
             double strafeX = gamepad1.right_stick_x;
             double strafeY = gamepad1.right_stick_y;
-            boolean xPressed = gamepad1.x;
-            boolean yPressed = gamepad1.y;
-            boolean aPressed = gamepad1.a;
-            boolean bPressed = gamepad1.b;
 
+            robot.drivetrain.povDrive(drivePower, turnAmt);
+            // should probably use a deadzone for this
+            if(Math.abs(strafeX)>0.3 || Math.abs(strafeY)>0.3) {
+                robot.drivetrain.strafe(strafeX, strafeY, turnAmt);
+            }
 
-            if(aPressed) positiveNegativeMultiplier = -1;
-            else positiveNegativeMultiplier = 1;
+            // carousel
+            robot.carousel.turn(gamepad2.a);
 
-//            if(yPressed && !yWasPressed) robot.drivetrain.TURNING_LIMIT += 0.05*positiveNegativeMultiplier;
-//            if(bPressed && !bWasPressed) robot.drivetrain.STRAFE_LIMIT += 0.05*positiveNegativeMultiplier;
-//            if(xPressed && !xWasPressed) robot.drivetrain.DRIVE_LIMIT += 0.05*positiveNegativeMultiplier;
+            // intake
+            robot.intake.intakeMove(gamepad2.b);
 
-            xWasPressed = xPressed;
-            yWasPressed = yPressed;
-            bWasPressed = bPressed;
+            // outtake slide
+            if (gamepad2.right_bumper) {
+                robot.outtake.setSlidePower(abs(robot.outtake.slidePower));
+                robot.outtake.slideMove(true);
+            }
+            else if (gamepad2.left_bumper) {
+                robot.outtake.setSlidePower(-abs(robot.outtake.slidePower));
+                robot.outtake.slideMove(true);
+            }
+            else {robot.outtake.slideMove(false);}
 
-//            telemetry.addData("Drive Limit", robot.drivetrain.DRIVE_LIMIT);
-//            telemetry.addData("Turning Limit", robot.drivetrain.TURNING_LIMIT);
-//            telemetry.addData("Strafe Limit", robot.drivetrain.STRAFE_LIMIT);
-
-
-//            robot.drivetrain.power(Drivetrain.Movement.POV, turnAmt, drivePower);
-//            robot.drivetrain.power(Drivetrain.Movement.STRAFE, strafeX, strafeY);
-
+            robot.imu.logVals();
             telemetry.update();
         }
     }

@@ -64,7 +64,7 @@ public class Outtake implements Subsystem {
     }
 
     public void slideLowestPosition() {
-        slidePower = abs(slidePower);
+        slidePower = -abs(slidePower);
         while (slide.getCurrentPosition() > 0) {
             slideMove(true);
         }
@@ -75,7 +75,7 @@ public class Outtake implements Subsystem {
 
     public void slideMiddlePosition() {
         if (slideExtendedFully) {
-            slidePower = abs(slidePower);
+            slidePower = -abs(slidePower);
             while (slide.getCurrentPosition() > 2.125 * motorTicks) {
                 slideMove(true);
             }
