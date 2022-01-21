@@ -5,12 +5,18 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
+import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
+
+import java.util.List;
+
 import omnitech.OurRobot;
 
 @Autonomous
-public class AutoOpMode extends LinearOpMode {
+public class PracticeAutoOpMode extends LinearOpMode {
 
     private OurRobot robot;
+    private TFObjectDetector tfod;
 
     @Override
     public void runOpMode() {
@@ -25,6 +31,8 @@ public class AutoOpMode extends LinearOpMode {
         telemetry.update();
 
         ElapsedTime timer = new ElapsedTime();
+
+        tfod = robot.camera.getTfod();
 
         waitForStart();
 
@@ -57,7 +65,6 @@ public class AutoOpMode extends LinearOpMode {
 //            lastTime = timeNow;
 
             robot.drivetrain.rotate(90);
-
         }
     }
 }
