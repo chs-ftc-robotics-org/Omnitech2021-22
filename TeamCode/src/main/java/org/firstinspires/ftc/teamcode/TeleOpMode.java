@@ -45,7 +45,7 @@ public class TeleOpMode extends LinearOpMode {
             robot.carousel.turn(gamepad1.a);
 
             // intake
-            robot.intake.intakeMove(gamepad1.b);
+            //robot.intake.intakeMove(gamepad1.b);
 
             // outtake (probably use left and right bumper)
 

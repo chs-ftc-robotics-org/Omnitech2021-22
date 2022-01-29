@@ -58,7 +58,7 @@ public class Camera implements Subsystem {
     }
 
     public boolean active() {
-        return active;
+        return false;
     }
     public TFObjectDetector getTfod() {return tfod;}
 }
