@@ -23,7 +23,7 @@ public class OurRobot {
             carousel,
             imu,
             intake,
-            outtake,
+            outtake
             //slides
             //rgb
     };

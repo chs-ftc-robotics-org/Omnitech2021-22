@@ -12,10 +12,10 @@ import omnitech.Subsystem;
 
 public class Outtake implements Subsystem {
 
-    public static final boolean active = false;
+    public static final boolean active = true;
 
     public DcMotor slide;
-    public CRServo elbow;
+    public Servo elbow;
     public Servo box;
 
     public double slidePower = 0.25;
@@ -31,13 +31,12 @@ public class Outtake implements Subsystem {
     @Override
     public void initialize(LinearOpMode opMode, OurRobot robot) {
         slide = opMode.hardwareMap.get(DcMotor.class, "slide");
-        slide.setDirection(DcMotorSimple.Direction.FORWARD);
+        slide.setDirection(DcMotor.Direction.FORWARD);
         slide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        elbow = opMode.hardwareMap.get(CRServo.class, "elbow");
+        elbow = opMode.hardwareMap.get(Servo.class, "elbow");
         box = opMode.hardwareMap.get(Servo.class, "box");
         box.setDirection(Servo.Direction.FORWARD);
-        elbow.setDirection(CRServo.Direction.FORWARD);
+        elbow.setDirection(Servo.Direction.FORWARD);
     }
 
     @Override
@@ -45,7 +44,7 @@ public class Outtake implements Subsystem {
 
     //public void setSlidePower(double power) { slidePower = power; }
 
-    public void setBoxPosition(double position) { boxPosition = position; }
+    public void setBoxPosition(double position) { box.setPosition(position);}
 
     public void slideMove(boolean moving) {
         if (moving) {
@@ -95,8 +94,8 @@ public class Outtake implements Subsystem {
         slideExtendedFully = false;
         slideRetractedFully = false;
     }
-    public void setElbowPower(double power){
-        elbow.setPower(power);
+    public void setElbowPos(double power){
+        elbow.setPosition(power);
     }
     public void setSlidePower (double power1){
         slide.setPower(power1);

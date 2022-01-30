@@ -9,7 +9,7 @@ import omnitech.Subsystem;
 
 public class Intake implements Subsystem {
 
-    public static final boolean active = false;
+    public static final boolean active = true;
 
     // will make this more descriptive once we have an actual design
     public DcMotor intakeMotor;
@@ -18,7 +18,7 @@ public class Intake implements Subsystem {
 
     @Override
     public void initialize(LinearOpMode opMode, OurRobot robot) {
-        intakeMotor = opMode.hardwareMap.get(DcMotor.class,"intake_motor");
+        intakeMotor = opMode.hardwareMap.get(DcMotor.class,"intake");
         intakeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
@@ -26,7 +26,7 @@ public class Intake implements Subsystem {
     @Override
     public boolean active() { return active; }
 
-    public void setIntakePower(double power) { intakePower = power; }
+    public void setIntakePower(double power) { intakeMotor.setPower(power); }
 
     public void intakeMove(boolean moving) {
         if (moving) {

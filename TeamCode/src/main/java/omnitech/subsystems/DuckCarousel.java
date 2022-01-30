@@ -33,6 +33,9 @@ public class DuckCarousel implements Subsystem {
             duckSpinner.setPower(-turnPower);
         }
     }
+    public void stop() {
+        duckSpinner.setPower(0);
+    }
     public static void setTurnPower(int amount){
         turnPower += amount;
     }
