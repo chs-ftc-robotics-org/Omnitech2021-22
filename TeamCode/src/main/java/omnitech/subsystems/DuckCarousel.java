@@ -13,7 +13,7 @@ public class DuckCarousel implements Subsystem {
 
     public DcMotor duckSpinner;
 
-    private static final double TURN_POWER = 0.3;
+    public static double turnPower = 0.3;
     // 1.0 power m a y be a little overkill for this
 
     public void initialize(LinearOpMode opMode, OurRobot robot) {
@@ -26,15 +26,18 @@ public class DuckCarousel implements Subsystem {
         return active;
     }
 
-    public void turn(boolean turning) {
-        if(turning) {
-            duckSpinner.setPower(TURN_POWER);
+    public void turn(boolean direction) {
+        if (direction) {
+            duckSpinner.setPower(turnPower);
         } else {
-            duckSpinner.setPower(0.0);
+            duckSpinner.setPower(-turnPower);
         }
     }
+    public static void setTurnPower(int amount){
+        turnPower += amount;
+    }
 
-    public void turn(int amount){
+    public void turn(int amount1){
         // spin the motor a certain amount and then stop
     }
 

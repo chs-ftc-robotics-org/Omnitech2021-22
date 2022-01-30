@@ -51,11 +51,11 @@ public class TwoDriverTeleop extends LinearOpMode{
 
             // outtake slide
             if (gamepad2.right_bumper) {
-                robot.outtake.setSlidePower(abs(robot.outtake.slidePower));
+                //robot.outtake.setSlidePower(abs(robot.outtake.slidePower));
                 robot.outtake.slideMove(true);
             }
             else if (gamepad2.left_bumper) {
-                robot.outtake.setSlidePower(-abs(robot.outtake.slidePower));
+                //robot.outtake.setSlidePower(-abs(robot.outtake.slidePower));
                 robot.outtake.slideMove(true);
             }
             else {robot.outtake.slideMove(false);}

@@ -7,8 +7,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 // just runs a motor "only_motor"
-@TeleOp(name="Test", group="Linear Opmode")
-public class TestOpMode extends LinearOpMode {
+@TeleOp(name="BasicOpMode", group="Linear Opmode")
+public class BasicOpMode extends LinearOpMode {
 
     @Override
     public void runOpMode(){

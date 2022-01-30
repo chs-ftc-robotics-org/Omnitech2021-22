@@ -86,7 +86,7 @@ public class Drivetrain implements Subsystem {
 
         double lastError = -1*(target - robotInstance.imu.getHeading());
         double lastTime = timer.milliseconds();
-        while(opModeInstance.opModeIsActive()) {
+        while(opModeInstance.opModeIsActive() || timer.milliseconds() < 2000) {
             robotInstance.imu.logVals();
             opModeInstance.telemetry.update();
             double angle = robotInstance.imu.getHeading();

@@ -42,7 +42,30 @@ public class TeleOpMode extends LinearOpMode {
             }
 
             // carousel
-            robot.carousel.turn(gamepad1.a);
+            if(gamepad2.x){
+                robot.carousel.turn(true);
+            }
+            if(gamepad2.y){
+                robot.carousel.turn(false);
+            }
+            if(gamepad2.a){
+                robot.outtake.setBoxPosition(0.0);
+            }
+            if(gamepad2.b){
+                robot.outtake.setBoxPosition(0.7);
+            }
+            if(gamepad2.left_bumper){
+                robot.outtake.setElbowPower(0.4);
+            }
+            if(gamepad2.right_bumper){
+                robot.outtake.setElbowPower(-0.4);
+            }
+            if(gamepad2.right_trigger > 0.05)
+                robot.outtake.setSlidePower(gamepad2.right_trigger - 0.1);
+            else if(gamepad2.left_trigger > 0.05)
+                robot.outtake.setSlidePower(gamepad2.left_trigger - 0.1);
+
+
 
             // intake
             //robot.intake.intakeMove(gamepad1.b);
