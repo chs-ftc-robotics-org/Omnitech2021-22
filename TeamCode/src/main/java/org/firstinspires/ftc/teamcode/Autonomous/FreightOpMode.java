@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -34,16 +34,31 @@ public class FreightOpMode extends LinearOpMode {
         tfod = robot.camera.getTfod();
 
         boolean duckBarcodeScanningDone = false;
+        int freightDelivery = 0;
 
         waitForStart();
 
         timer.reset();
 
-        // do we need while loop?
-        while(opModeIsActive()) {
+        while (opModeIsActive()) {
 
-            // detecting duck/team shipping element location on barcode
+            // delivering pre-loaded box (we're just gonna put the box on the highest level
+            // unless we somehow get the camera to work
             if (!duckBarcodeScanningDone) {
+                robot.drivetrain.povDrive(0.3, 0);
+                sleep(1000);
+                robot.drivetrain.rotate(45);
+                sleep(1000);
+                robot.outtake.slideHighestPosition();
+                robot.outtake.setElbowPos(1);
+                robot.outtake.setBoxPosition(0.7);
+                sleep(1000);
+                robot.outtake.setBoxPosition(0.0);
+                robot.outtake.setElbowPos(0.3);
+                robot.outtake.slideLowestPosition();
+                duckBarcodeScanningDone = true;
+            }
+            /*if (!duckBarcodeScanningDone) {
                 if (tfod == null) {
                     telemetry.addData("weird", "tfod is null");
                     telemetry.update();
@@ -74,25 +89,49 @@ public class FreightOpMode extends LinearOpMode {
                     robot.outtake.slideHighestPosition();
                 }
                 duckBarcodeScanningDone = true;
-            }
+            }*/
 
             // freight delivery
-            // again, movement will be added later
+            if (freightDelivery < 2) {
+                // driving to freight
+                robot.drivetrain.rotate(180);
+                robot.drivetrain.povDrive(0.3, 0);
+                sleep(1000);
+                robot.drivetrain.rotate(45);
+                robot.drivetrain.povDrive(0.3, 0);
+                sleep(1000);
 
-            // taking in freight through intake
-            double timeBeforeIntake = timer.milliseconds();
+                // taking in freight through intake
+                robot.intake.setIntakePower(0.5);
+                sleep(1500);
+                robot.intake.setIntakePower(0);
 
-            // gonna change how long this runs later
-            if (timer.milliseconds() - timeBeforeIntake < 3000) {
-                robot.intake.intakeMove(true);
+                // driving to shipping hub
+                robot.drivetrain.rotate(180);
+                robot.drivetrain.povDrive(0.3, 0);
+                sleep(1000);
+                robot.drivetrain.rotate(45);
+                robot.drivetrain.povDrive(0.3, 0);
+                sleep(1000);
+
+                // delivering freight onto shipping hub
+                robot.outtake.slideHighestPosition();
+                robot.outtake.setElbowPos(1);
+                robot.outtake.setBoxPosition(0.7);
+                sleep(1000);
+                robot.outtake.setBoxPosition(0.0);
+                robot.outtake.setElbowPos(0.3);
+                robot.outtake.slideLowestPosition();
+                freightDelivery++;
             }
-            else {
-                robot.intake.intakeMove(false);
-            }
-
-            // delivering freight onto shipping hub
 
             // parking
+            robot.drivetrain.rotate(180);
+            robot.drivetrain.povDrive(0.3, 0);
+            sleep(1000);
+            robot.drivetrain.rotate(45);
+            robot.drivetrain.povDrive(0.3, 0);
+
         }
     }
 }
