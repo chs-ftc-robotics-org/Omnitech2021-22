@@ -13,7 +13,7 @@ import omnitech.OurRobot;
 
 // run this opmode if robot is positioned closer to freight
 @Autonomous
-public class FreightOpMode extends LinearOpMode {
+public class BlueLeftFreightOpMode extends LinearOpMode {
 
     private OurRobot robot;
     private TFObjectDetector tfod;
@@ -33,7 +33,7 @@ public class FreightOpMode extends LinearOpMode {
 
         tfod = robot.camera.getTfod();
 
-        boolean duckBarcodeScanningDone = false;
+        boolean preLoadedBoxDelivery = false;
         int freightDelivery = 0;
 
         waitForStart();
@@ -44,19 +44,19 @@ public class FreightOpMode extends LinearOpMode {
 
             // delivering pre-loaded box (we're just gonna put the box on the highest level
             // unless we somehow get the camera to work
-            if (!duckBarcodeScanningDone) {
+            if (!preLoadedBoxDelivery) {
                 robot.drivetrain.povDrive(0.3, 0);
                 sleep(1000);
+                robot.drivetrain.povDrive(0.0, 0);
                 robot.drivetrain.rotate(45);
-                sleep(1000);
                 robot.outtake.slideHighestPosition();
                 robot.outtake.setElbowPos(1);
                 robot.outtake.setBoxPosition(0.7);
-                sleep(1000);
+                sleep(500);
                 robot.outtake.setBoxPosition(0.0);
                 robot.outtake.setElbowPos(0.3);
                 robot.outtake.slideLowestPosition();
-                duckBarcodeScanningDone = true;
+                preLoadedBoxDelivery = true;
             }
             /*if (!duckBarcodeScanningDone) {
                 if (tfod == null) {
@@ -97,28 +97,32 @@ public class FreightOpMode extends LinearOpMode {
                 robot.drivetrain.rotate(180);
                 robot.drivetrain.povDrive(0.3, 0);
                 sleep(1000);
+                robot.drivetrain.povDrive(0.0, 0);
                 robot.drivetrain.rotate(45);
                 robot.drivetrain.povDrive(0.3, 0);
                 sleep(1000);
+                robot.drivetrain.povDrive(0.0, 0);
 
                 // taking in freight through intake
                 robot.intake.setIntakePower(0.5);
-                sleep(1500);
+                sleep(2000);
                 robot.intake.setIntakePower(0);
 
                 // driving to shipping hub
                 robot.drivetrain.rotate(180);
                 robot.drivetrain.povDrive(0.3, 0);
                 sleep(1000);
-                robot.drivetrain.rotate(45);
+                robot.drivetrain.povDrive(0.0, 0);
+                robot.drivetrain.rotate(-45);
                 robot.drivetrain.povDrive(0.3, 0);
                 sleep(1000);
+                robot.drivetrain.povDrive(0.0, 0);
 
                 // delivering freight onto shipping hub
                 robot.outtake.slideHighestPosition();
                 robot.outtake.setElbowPos(1);
                 robot.outtake.setBoxPosition(0.7);
-                sleep(1000);
+                sleep(500);
                 robot.outtake.setBoxPosition(0.0);
                 robot.outtake.setElbowPos(0.3);
                 robot.outtake.slideLowestPosition();
@@ -129,8 +133,12 @@ public class FreightOpMode extends LinearOpMode {
             robot.drivetrain.rotate(180);
             robot.drivetrain.povDrive(0.3, 0);
             sleep(1000);
+            robot.drivetrain.povDrive(0.0, 0);
             robot.drivetrain.rotate(45);
             robot.drivetrain.povDrive(0.3, 0);
+            sleep(1000);
+            robot.drivetrain.povDrive(0.0, 0);
+            sleep((long) (30000 - timer.milliseconds()));
 
         }
     }
