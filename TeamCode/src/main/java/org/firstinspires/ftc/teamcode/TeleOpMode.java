@@ -52,16 +52,16 @@ public class TeleOpMode extends LinearOpMode {
                 robot.carousel.turn(false);
             }
             if(gamepad2.a){
-                robot.outtake.setBoxPwr(0.2);
+                robot.outtake.setBoxPwr(value.boxVertical);
             }
             if(gamepad2.b){
-                robot.outtake.setBoxPwr(-0.2);
+                robot.outtake.setBoxPwr(value.boxDumped);
             }
             if(gamepad2.left_bumper){
-                robot.outtake.setElbowPwr(0.2);
+                robot.outtake.setElbowPwr(value.elbowRetracted);
             }
             if(gamepad2.right_bumper){
-                robot.outtake.setElbowPwr(-0.2);
+                robot.outtake.setElbowPwr(value.elbowExtended);
             }
             if(gamepad2.right_trigger > 0.1)
                 robot.outtake.setSlidePower(gamepad2.right_trigger / 3);

@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
+import org.firstinspires.ftc.teamcode.value;
 
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class BlueRightDuckCarouselOpMode extends LinearOpMode {
 
         tfod = robot.camera.getTfod();
 
-        boolean preLoadedBoxDeliveryDone = false;
+        boolean preLoadedBoxDelivery = false;
         boolean movementDone = false;
         boolean duckDeliveryDone = false;
 
@@ -45,19 +46,20 @@ public class BlueRightDuckCarouselOpMode extends LinearOpMode {
 
             // delivering pre-loaded box (we're just gonna put the box on the highest level
             // unless we somehow get the camera to work
-            if (!preLoadedBoxDeliveryDone) {
+            if (!preLoadedBoxDelivery) {
                 robot.drivetrain.povDrive(0.3, 0);
                 sleep(1000);
                 robot.drivetrain.povDrive(0.0, 0);
-                robot.drivetrain.rotate(-45);
-                robot.outtake.slideHighestPosition();
-                robot.outtake.setElbowPwr(0.2);
-                robot.outtake.setBoxPwr(0.2);
+                robot.drivetrain.povDrive(0.3,45);
+                robot.outtake.slide.setPower(0.3);
+                sleep(1250);
+                robot.outtake.setElbowPwr(value.elbowExtended);
+                robot.outtake.setBoxPwr(value.boxDumped);
                 sleep(500);
-                robot.outtake.setBoxPwr(-0.2);
-                robot.outtake.setElbowPwr(-0.3);
+                robot.outtake.setBoxPwr(value.boxVertical);
+                robot.outtake.setElbowPwr(value.elbowRetracted);
                 robot.outtake.slideLowestPosition();
-                preLoadedBoxDeliveryDone = true;
+                preLoadedBoxDelivery = true;
             }
 
             // driving to carousel
@@ -82,7 +84,7 @@ public class BlueRightDuckCarouselOpMode extends LinearOpMode {
             robot.drivetrain.povDrive(0.3, 0);
             sleep(500);
             robot.drivetrain.povDrive(0.0, 0);
-            sleep((long) (30000 - timer.milliseconds()));
+            //sleep((long) (30000 - timer.milliseconds()));
         }
     }
 }

@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
+import org.firstinspires.ftc.teamcode.value;
 
 import java.util.List;
 
@@ -48,13 +49,14 @@ public class BlueLeftFreightOpMode extends LinearOpMode {
                 robot.drivetrain.povDrive(0.3, 0);
                 sleep(1000);
                 robot.drivetrain.povDrive(0.0, 0);
-                robot.drivetrain.rotate(45);
-                robot.outtake.slideHighestPosition();
-                robot.outtake.setElbowPwr(0.2);
-                robot.outtake.setBoxPwr(0.2);
+                robot.drivetrain.povDrive(0.3,45);
+                robot.outtake.slide.setPower(0.3);
+                sleep(1250);
+                robot.outtake.setElbowPwr(value.elbowExtended);
+                robot.outtake.setBoxPwr(value.boxDumped);
                 sleep(500);
-                robot.outtake.setBoxPwr(-0.2);
-                robot.outtake.setElbowPwr(-0.3);
+                robot.outtake.setBoxPwr(value.boxVertical);
+                robot.outtake.setElbowPwr(value.elbowRetracted);
                 robot.outtake.slideLowestPosition();
                 preLoadedBoxDelivery = true;
             }
@@ -90,7 +92,7 @@ public class BlueLeftFreightOpMode extends LinearOpMode {
                 }
                 duckBarcodeScanningDone = true;
             }*/
-
+/*
             // freight delivery
             if (freightDelivery < 2) {
                 // driving to freight
@@ -128,17 +130,17 @@ public class BlueLeftFreightOpMode extends LinearOpMode {
                 robot.outtake.slideLowestPosition();
                 freightDelivery++;
             }
-
+*/
             // parking
-            robot.drivetrain.rotate(180);
+            robot.drivetrain.povDrive(0.3,180);
             robot.drivetrain.povDrive(0.3, 0);
             sleep(1000);
             robot.drivetrain.povDrive(0.0, 0);
-            robot.drivetrain.rotate(45);
+            robot.drivetrain.povDrive(0.3,45);
             robot.drivetrain.povDrive(0.3, 0);
             sleep(1000);
             robot.drivetrain.povDrive(0.0, 0);
-            sleep((long) (30000 - timer.milliseconds()));
+            //sleep((long) (30000 - timer.milliseconds()));
 
         }
     }
