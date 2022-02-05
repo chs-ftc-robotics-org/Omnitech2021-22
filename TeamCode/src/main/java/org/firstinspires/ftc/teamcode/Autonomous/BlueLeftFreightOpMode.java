@@ -50,11 +50,11 @@ public class BlueLeftFreightOpMode extends LinearOpMode {
                 robot.drivetrain.povDrive(0.0, 0);
                 robot.drivetrain.rotate(45);
                 robot.outtake.slideHighestPosition();
-                robot.outtake.setElbowPos(1);
-                robot.outtake.setBoxPosition(0.7);
+                robot.outtake.setElbowPwr(0.2);
+                robot.outtake.setBoxPwr(0.2);
                 sleep(500);
-                robot.outtake.setBoxPosition(0.0);
-                robot.outtake.setElbowPos(0.3);
+                robot.outtake.setBoxPwr(-0.2);
+                robot.outtake.setElbowPwr(-0.3);
                 robot.outtake.slideLowestPosition();
                 preLoadedBoxDelivery = true;
             }
@@ -120,11 +120,11 @@ public class BlueLeftFreightOpMode extends LinearOpMode {
 
                 // delivering freight onto shipping hub
                 robot.outtake.slideHighestPosition();
-                robot.outtake.setElbowPos(1);
-                robot.outtake.setBoxPosition(0.7);
+                robot.outtake.setElbowPwr(0.2);
+                robot.outtake.setBoxPwr(0.2);
                 sleep(500);
-                robot.outtake.setBoxPosition(0.0);
-                robot.outtake.setElbowPos(0.3);
+                robot.outtake.setBoxPwr(-0.2);
+                robot.outtake.setElbowPwr(-0.3);
                 robot.outtake.slideLowestPosition();
                 freightDelivery++;
             }

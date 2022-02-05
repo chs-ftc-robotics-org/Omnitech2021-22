@@ -15,8 +15,8 @@ public class Outtake implements Subsystem {
     public static final boolean active = true;
 
     public DcMotor slide;
-    public Servo elbow;
-    public Servo box;
+    public CRServo elbow;
+    public CRServo box;
 
     public double slidePower = 0.25;
     public double boxPosition = 0.5;
@@ -33,10 +33,10 @@ public class Outtake implements Subsystem {
         slide = opMode.hardwareMap.get(DcMotor.class, "slide");
         slide.setDirection(DcMotor.Direction.FORWARD);
         slide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        elbow = opMode.hardwareMap.get(Servo.class, "elbow");
-        box = opMode.hardwareMap.get(Servo.class, "box");
-        box.setDirection(Servo.Direction.FORWARD);
-        elbow.setDirection(Servo.Direction.FORWARD);
+        elbow = opMode.hardwareMap.get(CRServo.class, "elbow");
+        box = opMode.hardwareMap.get(CRServo.class, "box");
+        box.setDirection(CRServo.Direction.FORWARD);
+        elbow.setDirection(CRServo.Direction.FORWARD);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class Outtake implements Subsystem {
 
     //public void setSlidePower(double power) { slidePower = power; }
 
-    public void setBoxPosition(double position) { box.setPosition(position);}
+    public void setBoxPwr(double position) { box.setPower(position);}
 
     public void slideMove(boolean moving) {
         if (moving) {
@@ -94,8 +94,8 @@ public class Outtake implements Subsystem {
         slideExtendedFully = false;
         slideRetractedFully = false;
     }
-    public void setElbowPos(double power){
-        elbow.setPosition(power);
+    public void setElbowPwr(double power){
+        elbow.setPower(power);
     }
     public void setSlidePower (double power1){
         slide.setPower(power1);
