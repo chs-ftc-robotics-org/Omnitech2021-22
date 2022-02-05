@@ -49,7 +49,6 @@ public class BlueLeftFreightOpMode extends LinearOpMode {
                 robot.drivetrain.povDrive(0.3, 0);
                 sleep(1000);
                 robot.drivetrain.povDrive(0.0, 0);
-                robot.drivetrain.povDrive(0.3,45);
                 robot.outtake.slide.setPower(0.3);
                 sleep(1250);
                 robot.outtake.setElbowPwr(value.elbowExtended);
