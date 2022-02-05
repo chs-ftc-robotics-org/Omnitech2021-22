@@ -15,7 +15,7 @@ import omnitech.OurRobot;
 
 @Disabled
 @Autonomous(name="Blue Left Auto", group = "auto")
-public class BlueLeftAuto extends LinearOpMode {
+public class BasicAuto extends LinearOpMode {
     private OurRobot robot;
 
     @Override

@@ -14,7 +14,7 @@ import omnitech.OurRobot;
 
 // run this opmode if robot is positioned closer to duck carousel
 @Autonomous
-public class BlueRightDuckCarouselOpMode extends LinearOpMode {
+public class RedLeft extends LinearOpMode {
 
     private OurRobot robot;
     private TFObjectDetector tfod;
@@ -47,10 +47,12 @@ public class BlueRightDuckCarouselOpMode extends LinearOpMode {
             // delivering pre-loaded box (we're just gonna put the box on the highest level
             // unless we somehow get the camera to work
             if (!preLoadedBoxDelivery) {
-                robot.drivetrain.povDrive(0.3, 0);
+                robot.drivetrain.povDrive(-0.4, 0);
                 sleep(1000);
                 robot.drivetrain.povDrive(0.0, 0);
-                robot.drivetrain.povDrive(0.3,45);
+                robot.drivetrain.povDrive(-0.0, 0.3);
+                sleep(800);
+                robot.drivetrain.povDrive(0.0, 0);
                 robot.outtake.slide.setPower(0.3);
                 sleep(1250);
                 robot.outtake.setElbowPwr(value.elbowExtended);
@@ -58,13 +60,15 @@ public class BlueRightDuckCarouselOpMode extends LinearOpMode {
                 sleep(500);
                 robot.outtake.setBoxPwr(value.boxVertical);
                 robot.outtake.setElbowPwr(value.elbowRetracted);
-                robot.outtake.slideLowestPosition();
+                robot.outtake.slide.setPower(-0.4);
+                sleep(1250);
                 preLoadedBoxDelivery = true;
             }
 
             // driving to carousel
             if (!movementDone) {
-                robot.drivetrain.rotate(180);
+                robot.drivetrain.povDrive(0.1, 0.1);
+                sleep(1200);
                 robot.drivetrain.povDrive(0.3, 0);
                 sleep(2500);
                 robot.drivetrain.povDrive(0, 0);

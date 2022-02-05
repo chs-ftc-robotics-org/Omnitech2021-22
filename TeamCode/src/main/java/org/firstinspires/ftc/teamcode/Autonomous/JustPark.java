@@ -32,8 +32,8 @@ public class JustPark extends LinearOpMode {
 
         while (opModeIsActive()) {
             if (!parked) {
-                robot.drivetrain.strafe(-0.4, 0, 0);
-                sleep(10000);
+                robot.drivetrain.povDrive(0.4, 0.0);
+                sleep(5000);
                 robot.drivetrain.povDrive(0.0, 0);
                 parked = true;
             }

@@ -14,7 +14,7 @@ import omnitech.OurRobot;
 
 // run this opmode if robot is positioned closer to freight
 @Autonomous
-public class BlueLeftFreightOpMode extends LinearOpMode {
+public class RedRight extends LinearOpMode {
 
     private OurRobot robot;
     private TFObjectDetector tfod;
@@ -46,19 +46,37 @@ public class BlueLeftFreightOpMode extends LinearOpMode {
             // delivering pre-loaded box (we're just gonna put the box on the highest level
             // unless we somehow get the camera to work
             if (!preLoadedBoxDelivery) {
-                robot.drivetrain.povDrive(0.3, 0);
+                robot.drivetrain.povDrive(-0.4, 0);
                 sleep(1000);
                 robot.drivetrain.povDrive(0.0, 0);
-                robot.outtake.slide.setPower(0.3);
+                robot.drivetrain.povDrive(-0.0, -0.3);
+                sleep(800);
+                robot.drivetrain.povDrive(0.0, 0);
+                robot.outtake.slide.setPower(-0.5);
                 sleep(1250);
-                robot.outtake.setElbowPwr(value.elbowExtended);
-                robot.outtake.setBoxPwr(value.boxDumped);
-                sleep(500);
-                robot.outtake.setBoxPwr(value.boxVertical);
-                robot.outtake.setElbowPwr(value.elbowRetracted);
-                robot.outtake.slideLowestPosition();
+                robot.outtake.slide.setPower(0.0);
+                robot.outtake.elbow.setPosition(value.elbowExtended);
+                robot.outtake.slide.setPower(0.0);
+                robot.outtake.box.setPosition(value.boxDumped);
+                sleep(1000);
+                robot.outtake.elbow.setPosition(value.elbowRetracted);
+                robot.outtake.slide.setPower(0.4);
+                sleep(1250);
                 preLoadedBoxDelivery = true;
             }
+            // parking
+            robot.drivetrain.povDrive(-0.0, 0.3);
+            sleep(400);
+            robot.drivetrain.povDrive(0.0, 0);
+            robot.drivetrain.povDrive(0.4, 0);
+            sleep(1000);
+            robot.drivetrain.povDrive(0.0, 0);
+            robot.drivetrain.povDrive(0.2, -0.1);
+            sleep(1000);
+            robot.drivetrain.povDrive(0.0, 0);
+            robot.drivetrain.povDrive(0.3, 0);
+            sleep(3000);
+            robot.drivetrain.povDrive(0.0, 0);
             /*if (!duckBarcodeScanningDone) {
                 if (tfod == null) {
                     telemetry.addData("weird", "tfod is null");
@@ -130,15 +148,7 @@ public class BlueLeftFreightOpMode extends LinearOpMode {
                 freightDelivery++;
             }
 */
-            // parking
-            robot.drivetrain.povDrive(0.3,180);
-            robot.drivetrain.povDrive(0.3, 0);
-            sleep(1000);
-            robot.drivetrain.povDrive(0.0, 0);
-            robot.drivetrain.povDrive(0.3,45);
-            robot.drivetrain.povDrive(0.3, 0);
-            sleep(1000);
-            robot.drivetrain.povDrive(0.0, 0);
+
             //sleep((long) (30000 - timer.milliseconds()));
 
         }
