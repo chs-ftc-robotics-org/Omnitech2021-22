@@ -35,7 +35,7 @@ public class TeleOpMode extends LinearOpMode {
             double strafeY = gamepad1.right_stick_y;
 
 
-            robot.drivetrain.povDrive(drivePower, turnAmt);
+            robot.drivetrain.povDrive(drivePower/2, turnAmt/2);
             // should probably use a deadzone for this
             if(Math.abs(strafeX)>0.3 || Math.abs(strafeY)>0.3) {
                 robot.drivetrain.strafe(strafeX, strafeY, turnAmt);
@@ -67,7 +67,8 @@ public class TeleOpMode extends LinearOpMode {
                 robot.outtake.setSlidePower(gamepad2.right_trigger / 3);
             else if(gamepad2.left_trigger > 0.1)
                 robot.outtake.setSlidePower(-gamepad2.left_trigger / 3);
-            robot.intake.setIntakePower(gamepad2.left_stick_y / 2);
+            if(gamepad2.left_stick_y > 0.2 || gamepad2.left_stick_y < 0.2)
+                robot.intake.setIntakePower(gamepad2.left_stick_y / 4);
 
 
 
